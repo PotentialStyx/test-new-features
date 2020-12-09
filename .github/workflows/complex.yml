@@ -23,3 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: "echo complex"
+  complex2:
+    needs: depend
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo job depends on this matrix above"
+  final:
+    needs: [build,depend,depend2,complex,complex2]
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo job depends on this matrix above"
