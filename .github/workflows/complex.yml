@@ -7,7 +7,7 @@ jobs:
       matrix:
         node: [6, 8, 10]
     steps:
-      - run: "echo ${{ matrix.node }}"
+      - run: "exit ${{ matrix.node }}"
         name: "matrix ${{ matrix.node }}"
   depend:
     needs: build
