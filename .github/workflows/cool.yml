@@ -1,0 +1,13 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [6, 8, 10]
+    steps:
+      - run: "echo ${{ matrix.node }}"
+  depend:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo job depends on this matrix above"
