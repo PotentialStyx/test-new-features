@@ -1,4 +1,4 @@
-name: test-stuff
+name: complex-stuff
 on: [push]
 jobs:
   build:
@@ -13,3 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: "echo job depends on this matrix above"
+  depend2:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo job depends on this matrix above x2"
+  complex:
+    needs: [depend, depend2]
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo complex"
