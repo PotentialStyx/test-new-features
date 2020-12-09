@@ -7,7 +7,7 @@ jobs:
       matrix:
         node: [6, 8, 10]
     steps:
-      - run: "exit ${{ matrix.node }}"
+      - run: "echo ${{ matrix.node }}"
         name: "matrix ${{ matrix.node }}"
   depend:
     needs: build
@@ -21,6 +21,8 @@ jobs:
     steps:
       - run: "echo job depends on this matrix above x2"
         name: "depend2"
+      - run: "exit 1"
+        name: "fail!"
   complex:
     needs: [depend, depend2]
     runs-on: ubuntu-latest
