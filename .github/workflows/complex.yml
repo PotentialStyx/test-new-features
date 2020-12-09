@@ -8,28 +8,34 @@ jobs:
         node: [6, 8, 10]
     steps:
       - run: "echo ${{ matrix.node }}"
+        name: "matrix ${{ matrix.node }}"
   depend:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - run: "echo job depends on this matrix above"
+        name: "depend"
   depend2:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - run: "echo job depends on this matrix above x2"
+        name: "depend2"
   complex:
     needs: [depend, depend2]
     runs-on: ubuntu-latest
     steps:
       - run: "echo complex"
+        name: "complex"
   complex2:
     needs: depend
     runs-on: ubuntu-latest
     steps:
-      - run: "echo job depends on this matrix above"
+      - run: "echo depend on depend, but not depend2"
+        name: "complex 2"
   final:
     needs: [build,depend,depend2,complex,complex2]
     runs-on: ubuntu-latest
     steps:
-      - run: "echo job depends on this matrix above"
+      - run: "echo job depends on all other jobs"
+        name: "final action"
