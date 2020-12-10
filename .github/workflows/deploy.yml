@@ -18,3 +18,4 @@ jobs:
           token: "${{ github.token }}"
           target_url: https://codemonkey51.dev
           environment: production
+          initial_status: "success"
