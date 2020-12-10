@@ -22,7 +22,7 @@ jobs:
       - run: "exit 1"
         name: "Deploy"
       - uses: chrnorm/deployment-action@releases/v1
-        if: " ${{ success() }} "
+        if: success()
         name: Set Deployment as complete
         id: finish_deployment
         with:
@@ -30,11 +30,13 @@ jobs:
           target_url: https://codemonkey51.dev
           environment: production
           initial_status: "success"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
       - uses: chrnorm/deployment-action@releases/v1
-        if: " ${{ failure() }} "
+        if: failure()
         name: Set Deployment as fail
         with:
           token: "${{ github.token }}"
           target_url: https://codemonkey51.dev
           environment: production
           initial_status: "failure"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
